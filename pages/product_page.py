@@ -6,7 +6,7 @@ class ProductPage(BasePage):
 
     def add_product_to_basket(self):
         self.click_button_basket()
-        self.solve_quiz_and_get_code()
+        #self.solve_quiz_and_get_code()
         #time.sleep(10)
         product_name = self.get_product_name()
         self.should_be_message_added_to_basket(product_name)

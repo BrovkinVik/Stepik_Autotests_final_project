@@ -1,6 +1,34 @@
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
 import pytest
+import time
+
+@pytest.mark.login_user
+class TestUserAddToBasketFromProductPage():
+
+	@pytest.fixture(scope="function", autouse=True)
+	def setup(self, browser):
+		link = "http://selenium1py.pythonanywhere.com/accounts/login/"
+		page = LoginPage(browser, link)
+		page.open()
+		email = str(time.time()) + "@fakemail.org"
+		password = time.ctime().replace(' ', "")
+		page.register_new_user(email, password)
+		page.should_be_authorized_user()
+
+	def test_user_cant_see_success_message(self, browser):
+		link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+		page = ProductPage(browser, link)
+		page.open()
+		page.should_not_be_success_message()
+
+	def test_user_can_add_product_to_basket(self, browser):
+		link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+		page = ProductPage(browser, link)
+		page.open()
+		print(link)
+		page.add_product_to_basket()
 
 list_link = [f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{n}" for n in range(7)] + \
 	[pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail)] + \

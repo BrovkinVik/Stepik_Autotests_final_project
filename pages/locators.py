@@ -5,10 +5,14 @@ class BasePageLocators():
 	LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 	BASKET_LINK = (By.CSS_SELECTOR, ".btn-group a")
 	BASKET_LINK_INVALID = (By.CSS_SELECTOR, ".btn_group b")
+	USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 class LoginPageLocators():
 	LOGIN_SUBMIT = (By.CSS_SELECTOR, "[name='login_submit']")
 	REGISTRATION_SUBMIT = (By.CSS_SELECTOR, "[name='registration_submit']")
+	EMAIL = (By.CSS_SELECTOR, "#id_registration-email")
+	PASSWORD = (By.CSS_SELECTOR, "#id_registration-password1")
+	CONF_PASSWORD = (By.CSS_SELECTOR, "#id_registration-password2")
 
 class ProductPageLocators():
 	BUTTON_ADD_TO_BASKET = (By.CSS_SELECTOR, "button.btn-add-to-basket")
