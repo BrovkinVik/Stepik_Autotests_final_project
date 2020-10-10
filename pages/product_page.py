@@ -5,9 +5,10 @@ import time
 class ProductPage(BasePage):
 
     def add_product_to_basket(self):
+        promo = "promo=offer" in self.browser.current_url
         self.click_button_basket()
-        #self.solve_quiz_and_get_code()
-        #time.sleep(10)
+        if promo:
+            self.solve_quiz_and_get_code()
         product_name = self.get_product_name()
         self.should_be_message_added_to_basket(product_name)
         product_price = self.get_product_price()
@@ -31,8 +32,6 @@ class ProductPage(BasePage):
  
     def basket_price_is_equal_to_price_of_goods(self, product_price):
         basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE)
-        print("Basket price:", basket_price.text)
-        print("Product price:", product_price.text)
         assert product_price.text == basket_price.text, "Basket price does not equal product price"
 
     def should_not_be_success_message(self):

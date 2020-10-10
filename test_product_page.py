@@ -23,23 +23,22 @@ class TestUserAddToBasketFromProductPage():
 		page.open()
 		page.should_not_be_success_message()
 
+	@pytest.mark.need_review
 	def test_user_can_add_product_to_basket(self, browser):
 		link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 		page = ProductPage(browser, link)
 		page.open()
-		print(link)
 		page.add_product_to_basket()
 
 list_link = [f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{n}" for n in range(7)] + \
 	[pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail)] + \
 	[f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{n}" for n in range(8, 10)]
 
-@pytest.mark.param
+@pytest.mark.need_review
 @pytest.mark.parametrize("link", list_link)
 def test_guest_can_add_product_to_basket(browser, link):
     page = ProductPage(browser, link)
     page.open()
-    print(link)
     page.add_product_to_basket()
 
 @pytest.mark.negative_checks
@@ -74,14 +73,15 @@ def test_guest_should_see_login_link_on_product_page(browser):
 	page.open()
 	page.should_be_login_link()
 
-@pytest.mark.pom_step8
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
+	time.sleep(4)
 	link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
 	page = ProductPage(browser, link)
 	page.open()
 	page.go_to_login_page()
 
-@pytest.mark.lesson4_3_10
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 	link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/"
 	page = ProductPage(browser, link)
